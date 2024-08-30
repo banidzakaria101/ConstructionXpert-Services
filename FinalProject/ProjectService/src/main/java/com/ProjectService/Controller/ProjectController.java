@@ -1,11 +1,12 @@
 package com.ProjectService.Controller;
 
-import com.ProjectService.Services.ProjectService;
+import com.ProjectService.services.ProjectService;
 import com.ProjectService.entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/project")
 @RestController
@@ -25,7 +26,7 @@ public class ProjectController {
     }
 
     @GetMapping("/find/{id}")
-    public Project findProject(@PathVariable Long id) {
+    public Optional<Project> findProject(@PathVariable Long id) {
         return projectsService.getProject(id);
     }
 

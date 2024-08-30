@@ -1,11 +1,9 @@
 package com.TaskService.service;
 
 import com.TaskService.dto.Project;
-import com.TaskService.dto.TaskResponse;
 import com.TaskService.entity.Task;
 import com.TaskService.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -38,28 +36,15 @@ public class TaskService {
         return taskRepo.findAll();
     }
 
-    public ResponseEntity<?> getTaskById(Long id) {
-        Optional<Task> task = taskRepo.findById(id);
-        if (task.isPresent()) {
-            Project project = restTemplate.getForObject("http://localhost:8080/project/find/" + task.get().getProjectId(), Project.class);
-            TaskResponse taskResponse = new TaskResponse(
-                    task.get().getId(),
-                    task.get().getTitle(),
-                    task.get().getDescription(),
-                    task.get().getPriority(),
-                    task.get().getStatus(),
-                    project
-            );
-            return  new ResponseEntity<>(taskResponse, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
+    public Optional<Task> getTaskById(Long id) {
+        return taskRepo.findById(id);
     }
 
     public void deleteTaskById(Long id) {
         taskRepo.deleteById(id);
     }
+
+
 
     public Task updateTask(Task task) {
         Task taskToUpdate = taskRepo.findById(task.getId()).get();

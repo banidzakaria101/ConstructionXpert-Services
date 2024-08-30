@@ -1,4 +1,4 @@
-package com.ProjectService.Repository;
+package com.ProjectService.repository;
 
 import com.ProjectService.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;

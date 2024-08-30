@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/task")
@@ -32,7 +33,7 @@ public class TaskController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<?> getTaskById(@PathVariable Long id) {
+    public Optional<Task> getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
