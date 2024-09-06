@@ -6,3 +6,6 @@ CREATE TABLE project (
                          project_type VARCHAR(50),
                          project_status VARCHAR(50)
 );
+
+
+
